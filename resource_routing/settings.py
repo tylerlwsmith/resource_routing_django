@@ -48,6 +48,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "overrides.middleware.FormMethodOverrideMiddleware",
 ]
 
 ROOT_URLCONF = "resource_routing.urls"
