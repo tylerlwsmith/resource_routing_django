@@ -20,7 +20,7 @@ class BlogPostViewset(TemplateViewSet):
             data={"post": get_object_or_404(BlogPost, id=pk)},
         )
 
-    def new(self, request: Request):
+    def create(self, request: Request):
         if request.method == "POST":
             form = BlogPostForm(request.POST)
             if form.is_valid():
@@ -30,11 +30,11 @@ class BlogPostViewset(TemplateViewSet):
             form = BlogPostForm()
 
         return Response(
-            template_name="blog/new.html",
+            template_name="blog/create.html",
             data={"form": form},
         )
 
-    def edit(self, request: Request, pk):
+    def update(self, request: Request, pk):
         post = BlogPost.objects.get(id=pk)
         if request.method == "PUT":
             form = BlogPostForm(request.POST, instance=post)
@@ -45,7 +45,7 @@ class BlogPostViewset(TemplateViewSet):
             form = BlogPostForm(instance=post)
 
         return Response(
-            template_name="blog/edit.html",
+            template_name="blog/update.html",
             data={"form": form, "post": form.instance},
         )
 

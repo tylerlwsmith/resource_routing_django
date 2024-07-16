@@ -4,7 +4,7 @@
   <div>
     <a href="/posts/">Back to all posts</a>
   </div>
-  <form method="POST" action="/posts/new/">
+  <form method="POST" action="/posts/create/">
     {% csrf_token %}
     {{ form }}
     <button type="submit">Submit</button>

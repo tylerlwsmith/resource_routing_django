@@ -1,6 +1,6 @@
 {% extends "blog/layout.html" %}
 {% block body %}
-  <h1>Edit {{ post.title }}</h1>
+  <h1>{{ post.title }}</h1>
   <div>
     <a href="/posts/">Back to all posts</a>
   </div>
@@ -9,7 +9,7 @@
     <a href="/posts/{{ post.id }}"></a>
   </div>
   <div>
-    <a href="/posts/{{ post.id }}/edit">Edit</a>
+    <a href="/posts/{{ post.id }}/update">Edit</a>
   </div>
   <form method="POST" action="/posts/{{ post.id }}/">
     {% csrf_token %}

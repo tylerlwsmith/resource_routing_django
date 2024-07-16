@@ -5,16 +5,16 @@ class TemplateRouter(SimpleRouter):
     routes = [
         Route(
             url=r"^{prefix}{trailing_slash}$",
-            mapping={"get": "list", "post": "create"},
+            mapping={"get": "list"},
             name="{basename}-list",
             detail=False,
             initkwargs={"suffix": "List"},
         ),
-        # NEW: New form route.
+        # NEW:  "create" to its own route.
         Route(
-            url=r"^{prefix}/new{trailing_slash}$",
-            mapping={"get": "new", "post": "new"},
-            name="{basename}-new",
+            url=r"^{prefix}/create{trailing_slash}$",
+            mapping={"get": "create", "post": "create"},
+            name="{basename}-create",
             detail=False,
             initkwargs={},
         ),
@@ -26,21 +26,16 @@ class TemplateRouter(SimpleRouter):
         ),
         Route(
             url=r"^{prefix}/{lookup}{trailing_slash}$",
-            mapping={
-                "get": "retrieve",
-                "put": "update",
-                "patch": "partial_update",
-                "delete": "destroy",
-            },
+            mapping={"get": "retrieve", "delete": "destroy"},
             name="{basename}-detail",
             detail=True,
             initkwargs={"suffix": "Instance"},
         ),
-        # NEW: Edit form route.
+        # NEW: Extracted "updated" to its own route.
         Route(
-            url=r"^{prefix}/{lookup}/edit{trailing_slash}$",
-            mapping={"get": "edit", "put": "edit"},
-            name="{basename}-edit",
+            url=r"^{prefix}/{lookup}/update{trailing_slash}$",
+            mapping={"get": "update", "put": "update"},
+            name="{basename}-update",
             detail=True,
             initkwargs={},
         ),

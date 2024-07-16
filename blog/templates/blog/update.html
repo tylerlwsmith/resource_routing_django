@@ -1,7 +1,7 @@
 {% extends "blog/layout.html" %}
 {% block body %}
   <h1>Edit {{ post.title }}</h1>
-  <form method="POST" action="/posts/{{ post.id }}/edit/">
+  <form method="POST" action="/posts/{{ post.id }}/update/">
     {% csrf_token %}
     {{ form }}
     <input type="hidden" name="_method" value="PUT" />
