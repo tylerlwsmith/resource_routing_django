@@ -13,7 +13,7 @@ class TemplateRouter(SimpleRouter):
         # NEW: New form route.
         Route(
             url=r"^{prefix}/new{trailing_slash}$",
-            mapping={"get": "new"},
+            mapping={"get": "new", "post": "new"},
             name="{basename}-new",
             detail=False,
             initkwargs={},
@@ -39,7 +39,7 @@ class TemplateRouter(SimpleRouter):
         # NEW: Edit form route.
         Route(
             url=r"^{prefix}/{lookup}/edit{trailing_slash}$",
-            mapping={"get": "edit"},
+            mapping={"get": "edit", "put": "edit"},
             name="{basename}-edit",
             detail=True,
             initkwargs={},

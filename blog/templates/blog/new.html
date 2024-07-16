@@ -1,0 +1,12 @@
+{% extends "blog/layout.html" %}
+{% block body %}
+  <h1>Edit {{ post.title }}</h1>
+  <div>
+    <a href="/posts/">Back to all posts</a>
+  </div>
+  <form method="POST" action="/posts/new/">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "blog/layout.html" %}
+{% block body %}
+  <h1>Edit {{ post.title }}</h1>
+  <form method="POST" action="/posts/{{ post.id }}/edit/">
+    {% csrf_token %}
+    {{ form }}
+    <input type="hidden" name="_method" value="PUT" />
+    <button type="submit">Submit</button>
+  </form>
+  <form method="POST" action="/posts/{{ post.id }}/">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="DELETE" />
+    <button type="submit">Delete</button>
+  </form>
+  <div>
+    <a href="/posts/">Back to all posts</a>
+  </div>
+{% endblock %}
