@@ -26,7 +26,7 @@ class BlogPostViewSet(TemplateViewSet):
         return render(request, "blog/create.html", {"form": form})
 
     def update(self, request: Request, pk):
-        post = BlogPost.objects.get(id=pk)
+        post = get_object_or_404(BlogPost, id=pk)
         if request.method == "PUT":
             form = BlogPostForm(request.POST, instance=post)
             if form.is_valid():
@@ -38,7 +38,7 @@ class BlogPostViewSet(TemplateViewSet):
         return render(request, "blog/update.html", {"form": form, "post": post})
 
     def destroy(self, request: Request, pk):
-        post = BlogPost.objects.get(id=pk)
+        post = get_object_or_404(BlogPost, id=pk)
         post.delete()
         return redirect(f"/posts/")
 
