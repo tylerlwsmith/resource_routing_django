@@ -7,7 +7,8 @@ from rest_framework.request import Request
 
 class BlogPostViewSet(TemplateViewSet):
     def list(self, request: Request):
-        return render(request, "blog/list.html", {"posts": BlogPost.objects.all()})
+        posts = BlogPost.objects.all()
+        return render(request, "blog/list.html", {"posts": posts})
 
     def retrieve(self, request: Request, pk):
         post = get_object_or_404(BlogPost, id=pk)
