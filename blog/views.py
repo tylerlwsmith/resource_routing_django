@@ -37,8 +37,8 @@ class BlogPostViewSet(TemplateViewSet):
         return render(request, "blog/update.html", {"form": form, "post": post})
 
     def destroy(self, request: Request, pk):
-        website = BlogPost.objects.get(id=pk)
-        website.delete()
+        post = BlogPost.objects.get(id=pk)
+        post.delete()
         return redirect(f"/posts/")
 
 
