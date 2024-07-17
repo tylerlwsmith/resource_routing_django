@@ -10,7 +10,7 @@ class TemplateRouter(SimpleRouter):
             detail=False,
             initkwargs={"suffix": "List"},
         ),
-        # NEW:  "create" to its own route.
+        # NEW: move "create" from the route above to its own route.
         Route(
             url=r"^{prefix}/create{trailing_slash}$",
             mapping={"get": "create", "post": "create"},
@@ -31,7 +31,7 @@ class TemplateRouter(SimpleRouter):
             detail=True,
             initkwargs={"suffix": "Instance"},
         ),
-        # NEW: Extracted "updated" to its own route.
+        # NEW: move "update" from the route above to its own route.
         Route(
             url=r"^{prefix}/{lookup}/update{trailing_slash}$",
             mapping={"get": "update", "put": "update"},
