@@ -1,38 +1,28 @@
 from blog.forms import BlogPostForm
 from blog.models import BlogPost
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render, redirect
 from overrides.viewsets import TemplateViewSet
-from rest_framework.response import Response
 from rest_framework.request import Request
 
 
-class BlogPostViewset(TemplateViewSet):
+class BlogPostViewSet(TemplateViewSet):
     def list(self, request: Request):
-        return Response(
-            template_name="blog/list.html",
-            data={"posts": BlogPost.objects.all()},
-        )
+        return render(request, "blog/list.html", {"posts": BlogPost.objects.all()})
 
     def retrieve(self, request: Request, pk):
-        return Response(
-            template_name="blog/retrieve.html",
-            data={"post": get_object_or_404(BlogPost, id=pk)},
-        )
+        post = get_object_or_404(BlogPost, id=pk)
+        return render(request, "blog/retrieve.html", {"post": post})
 
     def create(self, request: Request):
         if request.method == "POST":
             form = BlogPostForm(request.POST)
             if form.is_valid():
                 post = form.save()
-                return HttpResponseRedirect(f"/posts/{post.id}/")
+                return redirect(f"/posts/{post.id}/")
         else:
             form = BlogPostForm()
 
-        return Response(
-            template_name="blog/create.html",
-            data={"form": form},
-        )
+        return render(request, "blog/create.html", {"form": form})
 
     def update(self, request: Request, pk):
         post = BlogPost.objects.get(id=pk)
@@ -40,17 +30,17 @@ class BlogPostViewset(TemplateViewSet):
             form = BlogPostForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save()
-                return HttpResponseRedirect(f"/posts/{post.id}/")
+                return redirect(f"/posts/{post.id}/")
         else:
             form = BlogPostForm(instance=post)
 
-        return Response(
-            template_name="blog/update.html",
-            data={"form": form, "post": form.instance},
-        )
+        return render(request, "blog/update.html", {"form": form, "post": post})
 
     def destroy(self, request: Request, pk):
         website = BlogPost.objects.get(id=pk)
         website.delete()
+        return redirect(f"/posts/")
 
-        return HttpResponseRedirect(f"/posts/")
+
+def homepage_redirect(request):
+    return redirect("/posts/")
