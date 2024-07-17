@@ -1,7 +1,8 @@
 # Resource Routing in Django
 
-This project extends Django REST Framework's `ViewSet` and `SimpleRouter` to provide a Ruby on Rails-like class-based routing experience in server-render Django apps. It also features form-level method spoofing for `PUT`, `PATCH` and `DELETE` via custom middleware.
+You can read more about this project in [my blog post](https://dev.to/tylerlwsmith/emulating-rails-like-resource-controllers-in-a-server-rendered-django-app-alp).
 
+This project extends Django REST Framework's `ViewSet` and `SimpleRouter` to provide a Ruby on Rails-like request handler class and resource routing in server-render Django applications. It also features form-level method spoofing for `PUT`, `PATCH` and `DELETE` requests via custom middleware.
 The table below lists the project's custom `TemplateRouter`'s conventions:
 
 | HTTP Verb | Path               | ViewSet.Action        | Used for                     |
